@@ -9,13 +9,15 @@ class HonorTiles extends Component {
 
 
   render() {
-    const {type, kind} = this.props;
+    const {type, kind, onIncrease, onDecrease} = this.props;
     const range = kind === 'Wind' ? [...Array(4).keys()] : [...Array(3).keys()]
     const honorTiles = range.map(n =>
       (<Tile key={kind + ':' + n}
         type = "Honor"
         kind = {kind}
         sequence = {n}
+        onIncrease={onIncrease} 
+        onDecrease={onDecrease} 
       />) 
     );
     return (

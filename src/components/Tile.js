@@ -11,6 +11,7 @@ class Tile extends Component {
     type: 'Number', // Number, Honor
     kind: 'Character', // Character, Dot, Bamboo, Wind, Dragon
     sequence: 1,
+    editable: true
   }
   
   tile = () => {
@@ -55,7 +56,8 @@ class Tile extends Component {
     this.setState({
       selected: true,
       count: count + 1
-    })
+    });
+    this.props.onIncrease(this.props);
   }
   
   handleDecrease = () => {
@@ -67,21 +69,32 @@ class Tile extends Component {
     this.setState({
       selected: count === 1 ? false : true,
       count: count - 1
-    })
+    });
+
+    this.props.onDecrease(this.props);
   }
   render() {
     const tileName = this.tile();
     const count = this.state.count;
-    return (
-      <div class = "tile">
-        <p>{tileName}</p>
-        <span>{count}</span>
-        <div>
-          <button onClick={this.handleIncrease}>+</button>
-          <button onClick={this.handleDecrease}>-</button>
+    const editable = this.props.editable;
+    if(editable) {
+      return (
+        <div className="tile">
+          <p>{tileName}</p>
+          <span>{count}</span>
+          <div>
+            <button onClick={this.handleIncrease}>+</button>
+            <button onClick={this.handleDecrease}>-</button>
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return (
+        <div class = "tile">
+          <p>{tileName}</p>
+        </div>
+      );
+    }
   }
 }
 

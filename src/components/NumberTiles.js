@@ -7,12 +7,14 @@ class NumberTiles extends Component {
   }
   range = [...Array(9).keys()].map(n => n+1)
   render() {
-    const {kind} = this.props;
+    const {kind, onIncrease, onDecrease} = this.props;
     const numberTiles = this.range.map(n => 
       (<Tile key={kind+':'+n}
         type = "Number"
         kind = {kind}
         sequence = {n}
+        onIncrease={onIncrease} 
+        onDecrease={onDecrease} 
       />)
     );
     return (
